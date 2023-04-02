@@ -198,13 +198,5 @@ ul {
     font-size: 11px;
   }
 
-  .left-content {
-    position:sticky;
-  }
-
-}
-
-@media only screen and (min-width: 100px) and (max-width: 900px) and (orientation: landscape) {
-  
 }
 
