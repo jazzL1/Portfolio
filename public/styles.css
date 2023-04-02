@@ -119,6 +119,10 @@ ul {
   margin-bottom: 40px;
 }
 
+.projects {
+  height: fit-content;
+}
+
 .withDate {
   display: grid;
   grid-template-columns: 70% 30%;
