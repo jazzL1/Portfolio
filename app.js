@@ -3,7 +3,7 @@ const app = express();
 const path = require("path");
 const port = 80;
 
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
