@@ -197,11 +197,14 @@ ul {
   .date {
     font-size: 11px;
   }
-}
 
-@media only screen and (min-width: 100px) and (max-width: 900px) and (orientation: landscape) {
   .left-content {
     position:sticky;
   }
+
+}
+
+@media only screen and (min-width: 100px) and (max-width: 900px) and (orientation: landscape) {
+  
 }
 
