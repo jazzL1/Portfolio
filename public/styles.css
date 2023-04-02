@@ -174,7 +174,7 @@ ul {
   }
 }
 
-@media only screen and (min-width: 100px) and (max-width: 800px) {
+@media only screen and (min-width: 100px) and (max-width: 800px) and (orientation: landscape){
   .intro,
   .education,
   .profExp,
@@ -199,8 +199,3 @@ ul {
   }
 }
 
-@media only screen and (min-device-width: 100px) and (max-device-width: 800px) and (orientation: landscape) {
-  .left {
-    height: 400px;
-  }
-}
