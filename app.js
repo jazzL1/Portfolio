@@ -3,10 +3,11 @@ const app = express();
 const path = require("path");
 const port = 80;
 
+require('dotenv').config();
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, 'public')))
-
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -23,7 +24,7 @@ passport.deserializeUser(user.deserializeUser());
 
 const session = require('express-session');
 app.use(session({
-    secret: 'ASDFPOIU',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     }
@@ -69,8 +70,6 @@ function defaultDate(toDoItem) {
 app.get("/", (req, res) => {
   res.render("resume");
 });
-
-
 
 app.get('/toDo', (req, res) => {
   res.render('login');
@@ -154,14 +153,6 @@ app.use((err, req, res, next) => {
   const {statusCode, message} = err;
   res.status(statusCode).send(message);
 })
-
-
-
-
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Listenting on port ${port}`);
