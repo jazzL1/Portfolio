@@ -200,8 +200,9 @@ ul {
 }
 
 @media only screen and (min-width: 100px) and (max-width: 800px) and (orientation: landscape) {
-  .left-content {
-    color: black;
+  .left {
+    display: flex;
+    justify-content: center;
   }
 }
 
