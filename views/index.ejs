@@ -72,43 +72,40 @@
         document.getElementById(`colourDiv${id}`).setAttribute('class', 'highPriority');
     }
 
-        function defaultPriority(id, priority) {
-            if (priority === "1") {
-                document.getElementById(`highPriority${id}`).setAttribute('checked', 'true')
-            } else if (priority === "2") {
-                document.getElementById(`mediumPriority${id}`).setAttribute('checked', 'true')
-            } else {
-                document.getElementById(`lowPriority${id}`).setAttribute('checked', 'true')
+    function defaultPriority(id, priority) {
+        if (priority === "1") {
+            document.getElementById(`highPriority${id}`).setAttribute('checked', 'true')
+        } else if (priority === "2") {
+            document.getElementById(`mediumPriority${id}`).setAttribute('checked', 'true')
+        } else {
+            document.getElementById(`lowPriority${id}`).setAttribute('checked', 'true')
+        }
+    }
+
+    function unhideForm(id) {
+        document.getElementById(`editForm${id}`).removeAttribute('hidden');
+    }
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.validatedForm')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
             }
-        }
 
-        function unhideForm(id) {
-            document.getElementById(`editForm${id}`).removeAttribute('hidden');
-        }
-
-        function hideForm(id) {
-            document.getElementById(`editForm${id}`).setAttribute('hidden', 'true');
-        }
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.validatedForm')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-            }, false)
-            })
-        })()
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
     </script>
 
  

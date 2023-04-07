@@ -150,7 +150,7 @@ app.all('*', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  const {statusCode, message} = err;
+  const {message = "error", statusCode = 500} = err;
   res.status(statusCode).send(message);
 })
 

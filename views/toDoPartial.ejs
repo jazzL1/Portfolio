@@ -36,7 +36,9 @@
                 </div>
                 <button class="btn submitChangesBtn">Submit Task Changes</button>
             </form>
-            <button class="btn nevermindBtn" id="nevermind<%=toDo._id %>" onclick="hideForm('<%=toDo._id %>')">Nevermind</button>
+            <form action="/toDo/list" method="GET">
+                <button class="btn nevermindBtn" id="nevermind<%=toDo._id %>">Nevermind</button>
+            </form>
         </div>
     </div>
     <% } %> 
