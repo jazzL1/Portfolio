@@ -3,38 +3,19 @@ const app = express();
 const path = require("path");
 const port = 80;
 
-require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, 'public')))
-
-app.use(express.urlencoded({ extended: true }));
-
 const {toDoItem, user} = require('./schemas.js');
 const isLoggedIn = require('./middleware.js');
 const catchAsync = require('./utilities/catchAsync.js');
 const ExpressError = require('./utilities/ExpressError.js');
-
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
-passport.use(new LocalStrategy(user.authenticate()));
-passport.serializeUser(user.serializeUser());
-passport.deserializeUser(user.deserializeUser());
-
-const session = require('express-session');
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    }
-));
-app.use(passport.session());
+const {formatDate, sortCategories, defaultDate} = require('./public/helperFunctions.js');
 
 const methodOverride = require('method-override');
-app.use(methodOverride('_method'));
-
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const session = require('express-session');
 const mongoose = require('mongoose');
+
+
 async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/toDoList');
 }
@@ -42,30 +23,26 @@ main()
 .then(() => {console.log('Successfully connected to database')})
 .catch(err => console.log(err));
 
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
-function formatDate(toDoItem) {
-  const day = toDoItem.completeBy.getUTCDate();
-  const month = toDoItem.completeBy.getUTCMonth() + 1;
-  const year = toDoItem.completeBy.getUTCFullYear();
-  return `${year}/${month}/${day}`;
-};
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({ extended: true }));
 
-function sortCategories(categoryArray) {
-  categoryArray.sort((toDo1, toDo2) => toDo1.completeBy - toDo2.completeBy || toDo1.priority - toDo2.priority);
-}
+passport.use(new LocalStrategy(user.authenticate()));
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
 
-function defaultDate(toDoItem) {
-  let day = toDoItem.completeBy.getUTCDate();
-  let month = (toDoItem.completeBy.getUTCMonth() + 1);
-  const year = toDoItem.completeBy.getUTCFullYear();
-  if(month < 10) {
-      month = `0${month}`
-  }
-  if (day < 10) {
-      day = `0${day}`
-  }
-  return `${year}-${month}-${day}`;
-};
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    }
+));
+app.use(passport.session());
+app.use(methodOverride('_method'));
+
 
 app.get("/", (req, res) => {
   res.render("resume");
