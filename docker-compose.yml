@@ -1,0 +1,25 @@
+version: "3"
+services:
+       portfolio-app:
+          #  container_name: portfolio-app
+           image: jazzdocks/portfolio
+           restart: always
+           build: .
+           ports:
+             - "5000:80"
+          #  links:
+          #    - mongo
+           environment: 
+             - SESSION_SECRET
+          #  depends_on:
+          #    - mongo
+       mongo:
+             container_name: mongo
+             image: mongo:5-windowsservercore
+            #  volumes:
+            #    - ./data:/data/db
+             ports:
+               - '27017:27017'
+             #command: tail -F anything #keep the container running for debug puprpose ONLY
+# volumes:
+#   mongo: {}
