@@ -1,0 +1,15 @@
+{
+    "name": "Jazz Leibur Profolio",
+    "short_name": "Porftfolio",
+    "theme_color": "#2196f3",
+    "background_color": "#244c6b",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/", 
+    "icons": [
+        {
+            "src": "/images/app-icon.png",
+            "sizes": "350x350" 
+        }
+    ]
+  }
