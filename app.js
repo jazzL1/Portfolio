@@ -15,7 +15,6 @@ const LocalStrategy = require('passport-local');
 const session = require('express-session');
 const mongoose = require('mongoose');
 
-
 async function main() {
     await mongoose.connect('mongodb://mongo:27017/toDoList');
 }
@@ -134,3 +133,4 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Listenting on port ${port}`);
 });
+
